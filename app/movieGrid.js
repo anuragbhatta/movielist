@@ -3,6 +3,8 @@ import { useState, useEffect, useRef } from "react";
 import MoviePoster from "./moviePoster";
 import { URL } from "./constants";
 import { useOnScreen, useInfiniteScroll } from "./hooks/useInfiniteScroll";
+import { useInView } from 'react-intersection-observer';
+
 
 // import {
 //     useQuery,
@@ -16,8 +18,17 @@ const MovieGrid = ({ movies }) => {
     // loadMore
     const [movies1, setMovies1] = useState([]);
     const [pageNo, setPageNo] = useState(1);
+
+    const [isIntersecting, setIntersecting] = useState(false);
+    const ref = useRef(null);
+
     useEffect(() => {
         setMovies1(movies);
+        const observer = new IntersectionObserver(([entry]) => {
+            setIntersecting(entry.isIntersecting)
+        });
+        observer.observe(ref.current);
+        return () => observer.disconnect();
     }, []);
 
     useEffect(() => {
@@ -55,36 +66,46 @@ const MovieGrid = ({ movies }) => {
     console.log('pageNo : ', pageNo);
     console.log('secondLastRowValue : ', secondLastRowValue);
     console.log('issecondLastRow : ', issecondLastRow);
+
     useEffect(() => {
-        console.log('second last row');
-        loadMore();
-        if (!issecondLastRow)
-            setIssecondLastRow(secondLastRowValue);
-    }, [secondLastRowValue]);
+        // debugger;
+        if (isIntersecting) {
+            loadMore();
+        }
+        // if (!issecondLastRow)
+        //     setIssecondLastRow(secondLastRowValue);
+    }, [isIntersecting]);
 
     // {/* <div ref={lastMovieRef}> </div> */ }
 
     return (
-        <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
-            {
-                (pageNo === 1 ? movies : movies1).map((movie, index) => (
-                    <div key={index} >
+        <div>
+            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
+                {
+                    (pageNo === 1 ? movies : movies1).map((movie, index) => (
+                        <div key={index} >
 
-                        {
-                            index === movies1.length - 6
-                                ?
-                                <div ref={secondLastRow}>
-                                    {
-                                        secondLastRowValue && <MoviePoster key={index} movie={movie} index={index+1}/>
-                                    }
-                                </div>
-                                :
-                                <MoviePoster key={index} movie={movie} index={index+1}/>
-                        }
-                    </div>
-                ))
-            }
-        </div >
+                            {
+                                index === movies1.length - 6
+                                    ?
+                                    <div ref={secondLastRow}>
+                                        {
+                                            secondLastRowValue && <MoviePoster key={index} movie={movie} index={index + 1} />
+                                        }
+                                    </div>
+                                    :
+                                    <MoviePoster key={index} movie={movie} index={index + 1} />
+                            }
+                        </div>
+                    ))
+                }
+            </div >
+            <div ref={ref} className="view-for-is" style={{
+                height: "1px",
+                display: "block"
+            }}>
+            </div>
+        </div>
     );
 };
 
