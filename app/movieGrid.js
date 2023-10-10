@@ -3,20 +3,10 @@ import { useState, useEffect, useRef } from "react";
 import MoviePoster from "./moviePoster";
 import { URL } from "./constants";
 import { useOnScreen, useInfiniteScroll } from "./hooks/useInfiniteScroll";
-import { useInView } from 'react-intersection-observer';
 
-
-// import {
-//     useQuery,
-//     useMutation,
-//     useQueryClient,
-//     QueryClient,
-//     QueryClientProvider,
-//   } from '@tanstack/react-query';
-
-const MovieGrid = ({ movies }) => {
+const MovieGrid = ({ movies, total, pageSize }) => {
     // loadMore
-    const [movies1, setMovies1] = useState([]);
+    const [movies1, setMovies1] = useState(movies);
     const [pageNo, setPageNo] = useState(1);
 
     const [isIntersecting, setIntersecting] = useState(false);
@@ -36,14 +26,22 @@ const MovieGrid = ({ movies }) => {
             // debugger;
             try {
                 // Replace with your API endpoint and data fetching logic
-                const response = await fetch(`${URL}page${pageNo}.json`);
-                const data = await response.json();
-                // debugger;
-                console.log(`${pageNo} data : `, data?.page['content-items']?.content.length);
-                console.log(`${pageNo} data : `, data?.page['content-items']?.content);
+                // data?.page['page-size-returned'] 20
+                // data?.page['total-content-items'] 54
+                // console.log('total ', total)
+                // console.log('pageSize ', pageSize)
+                // console.log('total - pageSize * pageNo ', total - (pageSize * pageNo) + 20)
+                // console.log('(total - pageSize * pageNo) > 0)', (total - (pageSize * pageNo) + 20) > 0);
+                if (pageNo !== 1 && ((total - (pageSize * pageNo) + 20) > 0)) {
+                    const response = await fetch(`${URL}page${pageNo}.json`);
+                    const data = await response.json();
+                    // debugger;
+                    // console.log(`${pageNo} data : `, data?.page['content-items']?.content.length);
+                    // console.log(`${pageNo} data : `, data?.page['content-items']?.content);
+                    setMovies1((prevMovies) => [...prevMovies, ...data?.page['content-items']?.content]);
+                }
                 // debugger;
                 // data?.page['content-items']?.content
-                setMovies1((prevMovies) => [...prevMovies, ...data?.page['content-items']?.content]);
             } catch (error) {
                 console.error('Error fetching data:', error);
             }
@@ -63,9 +61,9 @@ const MovieGrid = ({ movies }) => {
     const secondLastRow = useRef();
     const secondLastRowValue = useInfiniteScroll(secondLastRow);
     const [issecondLastRow, setIssecondLastRow] = useState(false);
-    console.log('pageNo : ', pageNo);
-    console.log('secondLastRowValue : ', secondLastRowValue);
-    console.log('issecondLastRow : ', issecondLastRow);
+    // console.log('pageNo : ', pageNo);
+    // console.log('secondLastRowValue : ', secondLastRowValue);
+    // console.log('issecondLastRow : ', issecondLastRow);
 
     useEffect(() => {
         // debugger;

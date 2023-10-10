@@ -1,3 +1,4 @@
+'use client';
 import React from 'react';
 import Image from 'next/image';
 import back from '../public/Back.png';
@@ -19,7 +20,7 @@ const Header = () => {
         //     <Image src={search} alt="search" width={24} height={24} objectFit="contain" />
         // </header>
 
-        <header className="sticky top-0 mx-auto bg-[url('../public/bg.jpg')] shadow-lg p-4">
+        <header className="sticky top-0 mx-auto bg-[url('../public/nav_bar.png')] shadow-lg p-4">
             <div className="container mx-auto flex items-center justify-between p-4">
                 <div className="flex items-center">
                     <Image src={back} alt="back arrow" width={24} height={24} objectFit="contain" />
