@@ -9,6 +9,7 @@ const titillium_web = Titillium_Web({
   subsets: ['latin'],
   display: 'swap',
 });
+// default font
 // const inter = Inter({ subsets: ['latin'] })
 
 export const metadata = {

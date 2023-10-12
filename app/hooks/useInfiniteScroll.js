@@ -1,11 +1,12 @@
 import { useState, useEffect, useRef } from 'react';
 
+// handled inbfinite scroll using Intersection observer
 export const useInfiniteScroll = (loadMore) => {
     const lastElementRef = useRef(null);
 
     const handleIntersection = (entries) => {
         if (entries[0].isIntersecting) {
-            // User has scrolled to the second last row, trigger loading more data
+            // User has scrolled to the second last row, load more data
             loadMore();
         }
     };
@@ -31,7 +32,7 @@ export const useInfiniteScroll = (loadMore) => {
     return lastElementRef;
 };
 
-
+// not working
 export const useOnScreen = (ref) => {
     const [isIntersecting, setIntersecting] = useState(false);
     useEffect(() => {
