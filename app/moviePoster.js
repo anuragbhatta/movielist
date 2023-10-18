@@ -5,7 +5,7 @@ import missing_poster from '../public/missing_poster.png';
 import { IMAGE_URL } from './constants';
 import { useState } from 'react';
 
-// Singale Movie Poster and Title component which is to be reused
+// Single Movie Poster and Title component which is to be reused
 
 const MoviePoster = ({ movie, index }) => {
 
@@ -18,8 +18,8 @@ const MoviePoster = ({ movie, index }) => {
   // const imageSrc = movie['poster-image'] === "posterthatismissing.jpg" ? missing_poster : `${IMAGE_URL}${movie['poster-image']}`;
   // console.log('imageSrc : ', imageSrc);
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/3 xl:w-1/3 p-2">
-      {/* handled image loading error in a fallback image */}
+    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2">
+      {/* handled image loading error in a fallback image below and landscape above*/}
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <Image
           src={imageSrc}
@@ -31,8 +31,8 @@ const MoviePoster = ({ movie, index }) => {
         />
       </div>
       <div className="p-4">
-        {/* handled long text */}
-        <h6 className="text-xs mb-2 truncate">{index + ". " + movie.name}</h6>
+        {/* handled long text and landscape*/}
+        <h6 className="text-md mb-2 truncate lg:text-lg">{movie.name}</h6>
       </div>
     </div>
   );

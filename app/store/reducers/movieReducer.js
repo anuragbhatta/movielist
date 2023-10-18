@@ -15,6 +15,10 @@ export default function movieReducer(state = initialState, action) {
         const regex = new RegExp(action.payload.replace(/\s/g, '\\s*'), 'i');
         let updatedMovies = [...state.allMovies.filter((mv) => regex.test(mv.name))];
       return { ...state, movies: updatedMovies };
+    case 'cancelSearchMovies':{
+      let updatedMovies = [...state.allMovies];
+      return { ...state, movies: updatedMovies };
+    }
     case 'getMovies':{
         let updatedMovies = state.pageNo !== 1 ? [...state.allMovies, ...action.payload] : [...action.payload];
         return { ...state, movies: updatedMovies, allMovies: updatedMovies };

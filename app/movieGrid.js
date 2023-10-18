@@ -19,7 +19,6 @@ const MovieGrid = ({ movies, total, pageSize }) => {
     const pageCounter = useCallback(() => dispatch({ type: 'pageCounter' }), [dispatch]);
 
     useEffect(() => {
-        // setMovies1(movies);
         const observer = new IntersectionObserver(([entry]) => {
             setIntersecting(entry.isIntersecting)
         });
