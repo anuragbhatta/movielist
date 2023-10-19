@@ -18,7 +18,9 @@ const Header = () => {
     // added debounce in search
     const handleSearch = debounce((e) => {
         e.preventDefault();
-        if(e.target.value.length < maxSearchLength || e.target.value.length > minSearchLength){
+        console.log('e.target.value.length : ', e.target.value.length)
+        if(e.target.value.length < maxSearchLength && e.target.value.length > minSearchLength){
+            console.log('inside search');
             setSearchText(e.target.value);
         }
         else{
@@ -37,7 +39,7 @@ const Header = () => {
     }
 
     return (
-        <header className="sticky top-0 mx-auto bg-[url('../public/nav_bar.png')] shadow-lg p-4">
+        <header className="sticky top-0 mx-auto bg-[url('../public/nav_bar.png')] shadow-2xl p-4">
             <div className="container mx-auto flex items-center justify-between p-4">
                 <div className="flex items-center">
                     <Image src={back} alt="back arrow" width={24} height={24} onClick={handleBack}/>

@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
-import MoviePoster from "./moviePoster";
+import MoviePoster from "./MoviePoster";
 import { URL } from "./constants";
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll";
 import { useDispatch, useSelector } from "react-redux";
@@ -93,7 +93,7 @@ const MovieGrid = ({ movies, total, pageSize }) => {
                             </div>
                         ))
                 }
-            </div >
+            </div>
             <div ref={ref} className="view-for-is" style={{
                 height: "1px",
                 display: "block"

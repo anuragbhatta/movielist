@@ -1,2 +1,2 @@
 # movielist
-ui assignment diag
+ui assignment Diagonal

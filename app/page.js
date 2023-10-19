@@ -1,4 +1,4 @@
-import MovieGrid from './movieGrid';
+import MovieGrid from './MovieGrid';
 import Header from './header';
 import { URL } from './constants';
 import { Suspense } from 'react';
