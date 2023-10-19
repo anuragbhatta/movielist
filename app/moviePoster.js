@@ -18,7 +18,7 @@ const MoviePoster = ({ movie, index }) => {
   // const imageSrc = movie['poster-image'] === "posterthatismissing.jpg" ? missing_poster : `${IMAGE_URL}${movie['poster-image']}`;
   // console.log('imageSrc : ', imageSrc);
   return (
-    <div className="w-full sm:w-1/2 md:w-1/3 lg:w-1/4 xl:w-1/5 p-2">
+    <div className="w-full p-2">
       {/* handled image loading error in a fallback image below and landscape above*/}
       <div className="bg-white shadow-lg rounded-lg overflow-hidden">
         <Image

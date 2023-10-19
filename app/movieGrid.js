@@ -9,7 +9,7 @@ const MovieGrid = ({ movies, total, pageSize }) => {
     // const [movies1, setMovies1] = useState(movies);
     const [pageNo, setPageNo] = useState(1);
 
-    // handled inbfinite scroll using Intersection observer
+    // handled infinite scroll using Intersection observer
     const [isIntersecting, setIntersecting] = useState(false);
     const ref = useRef(null);
     const moviesList = useSelector((state) => state.movies);
@@ -67,7 +67,7 @@ const MovieGrid = ({ movies, total, pageSize }) => {
 
     return (
         <div>
-            <div className="grid grid-cols-3 sm:grid-cols-3 md:grid-cols-3 lg:grid-cols-4 gap-4 justify-center">
+            <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-4 lg:grid-cols-5 gap-4 sm:gap-2 md:gap-1 lg:gap-1 justify-center">
                 {/* handled fallback component for empty data */}
                 {
                     moviesList.movies.length === 0
