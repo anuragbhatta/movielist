@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
-import MoviePoster from "./MoviePoster";
+import MoviePoster from "./moviePoster";
 import { URL } from "./constants";
 import { useInfiniteScroll } from "./hooks/useInfiniteScroll";
 import { useDispatch, useSelector } from "react-redux";
